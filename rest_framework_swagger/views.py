@@ -126,13 +126,6 @@ class SwaggerResourcesView(APIDocView):
             }),
         })
 
-    def get_base_path(self):
-        protocol = SWAGGER_SETTINGS.get('protocol', 'http')
-        if 'base_path' in SWAGGER_SETTINGS:
-            return "%s://%s/api-docs" % (protocol, SWAGGER_SETTINGS.get('base_path', '').rstrip('/'))
-        else:
-            return ('%s://%s%s' % (protocol, self.request.get_host(), self.request.path)).rstrip('/')
-
     def get_resources(self):
         urlparser = UrlParser()
         urlconf = getattr(self.request, "urlconf", None)
